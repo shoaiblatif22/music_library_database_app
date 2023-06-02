@@ -30,4 +30,20 @@ end
       expect(response.body).to eq(expected_response)
     end
   end
+
+  context 'POST /albums' do
+    it 'should create a new album' do
+      response = post('/albums', 
+      title: 'Ok Computer', 
+      release_year: '1997', 
+      artist_id: '1')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to eq('')
+
+      response = get('/albums')
+
+      expect(response.body).to include('Ok Computer') 
+    end
+  end
 end
