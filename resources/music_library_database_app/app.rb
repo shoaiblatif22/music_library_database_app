@@ -13,4 +13,15 @@ class Application < Sinatra::Base
     also_reload 'lib/album_repository'
     also_reload 'lib/artist_repository'
   end
+# GET route to retrieve all albums
+  get '/albums' do
+    repo = AlbumRepository.new
+    albums = repo.all
+
+    response = albums.map do |album|
+      album.title
+    end.join(', ')
+
+    return response
+  end
 end
