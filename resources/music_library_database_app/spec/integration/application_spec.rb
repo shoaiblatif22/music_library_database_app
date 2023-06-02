@@ -55,4 +55,18 @@ end
       expect(response.body).to eq(expected_response)
     end
   end
+
+  context 'POST /artists' do
+    it 'should create a new artist and return it in the response of GET /artists' do
+      post('/artists', { name: 'Wild nothing', genre: 'Indie' })
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to eq('')
+
+      get('/artists')
+
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to include('Wild nothing')
+    end
+  end
 end
